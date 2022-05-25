@@ -1,41 +1,57 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <input type="text" placeholder="Search" v-model="search" />
+    <div style="margin-top: 8px;" v-for="customer in filteredCustomer" :key="customer.id">
+      <span>{{customer.name}}</span>        
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+  data() {
+    return {
+      search: "",
+      customers: [
+        {
+          id: "1",
+          name: "user 1 for a guide and recipes",
+          email: "ab@gmail.com",
+          phone: "5786965906",
+          unread: "0",
+        },
+        {
+          id: "2",
+          name: "user 2 on how to configure",
+          email: "abcd@gmail.com",
+          phone: "576676886",
+          unread: "0",
+        },
+        {
+          id: "3",
+          name: "user 3  customize this project",
+          email: "test@gmail.com",
+          phone: "67689696",
+          unread: "0",
+        },
+        {
+          id: "4",
+          name: "user 4 check out the vue-cli documentation.",
+          email: "d@gmail.com",
+          phone: "576865896",
+          unread: "0",
+        },
+      ],
+    };
+  },
+
+   computed: {
+    filteredCustomer() {
+      return this.customers.filter((cust) => {
+        return cust.name.toLowerCase().includes(this.search.toLowerCase());
+      });
+    },
+  },
 }
 </script>
 
