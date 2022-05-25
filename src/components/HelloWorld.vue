@@ -2,8 +2,9 @@
   <div class="hello">
   <form id="todo-field" v-on:submit="submitForm">
     <input type="text" placeholder="Search" v-model="search" />
-    <div style="margin-top: 8px;"><button>Reset</button></div>
+    <div style="margin-top: 25px;"><button>Reset</button></div>
   </form>
+  <h4 style="margin-left: 60%;">Showing {{this.filteredCustomer.length}} out of {{this.customers.length}}</h4>
     <div style="margin-top: 8px;" v-for="customer in filteredCustomer" :key="customer.id">
       <span>{{customer.name}}</span>        
     </div>
@@ -50,6 +51,8 @@ export default {
 
    computed: {
     filteredCustomer() {
+      var TotalLength = this.customers.length;
+      console.log(TotalLength);
       return this.customers.filter((cust) => {
         return cust.name.toLowerCase().includes(this.search.toLowerCase());
       });
