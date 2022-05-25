@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
+  <form id="todo-field" v-on:submit="submitForm">
     <input type="text" placeholder="Search" v-model="search" />
+    <div style="margin-top: 8px;"><button>Reset</button></div>
+  </form>
     <div style="margin-top: 8px;" v-for="customer in filteredCustomer" :key="customer.id">
       <span>{{customer.name}}</span>        
     </div>
@@ -52,6 +55,11 @@ export default {
       });
     },
   },
+
+  submitForm(e){
+    this.search = "";
+    e.preventDefault();
+  }
 }
 </script>
 
